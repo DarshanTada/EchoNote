@@ -8,15 +8,8 @@
     android:padding="16dp">
 
     <Button
-        android:id="@+id/btn_record"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Record Meeting" />
-
-    <Button
         android:id="@+id/btn_mom_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View MOM List"
-        android:layout_marginTop="16dp"/>
+        android:text="View MOM List" />
 </LinearLayout>

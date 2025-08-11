@@ -36,5 +36,7 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
+    implementation(project(":shared"))
+
     implementation(libs.constraintlayout)
 }

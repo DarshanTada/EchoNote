@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "EchoNote"
 include(":app")
+include(":mobile")
+include(":shared")
