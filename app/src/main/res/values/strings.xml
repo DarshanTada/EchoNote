@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">EchoNote</string>
+    <string name="desc_record_icon">Microphone icon</string>
+    <string name="record_status_idle">Ready to record</string>
+    <string name="start_recording">Start Recording</string>
+    <string name="stop_recording">Stop Recording</string>
+    <string name="recording_started">Recording started</string>
+    <string name="recording_stopped">Recording stopped</string>
+    <string name="failed_to_start_recording">Failed to start recording</string>
+    <string name="record_status_recording">Recording...</string>
+    <string name="record_status_failed">Recording failed</string>
 </resources>

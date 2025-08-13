@@ -39,4 +39,5 @@ dependencies {
     implementation(project(":shared"))
 
     implementation(libs.constraintlayout)
+    implementation(libs.wear)
 }

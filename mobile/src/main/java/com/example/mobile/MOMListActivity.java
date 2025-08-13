@@ -10,12 +10,57 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MOMListActivity extends Activity {
 
     private ListView listView;
     private MOMAdapter adapter;
-    private ArrayList<MOM> momList;
+    private static ArrayList<MOMNote> momNotes = new ArrayList<>();
+    private ArrayList<MOMNote> filteredNotes = new ArrayList<>();
+
+    public static void addNote(MOMNote note) {
+        momNotes.add(note);
+        Collections.sort(momNotes, (a, b) -> Long.compare(b.getTimestamp(), a.getTimestamp()));
+    }
+
+    private void updateAdapter() {
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    public void filterByTag(String tag) {
+        filteredNotes.clear();
+        for (MOMNote note : momNotes) {
+            if (note.getTag() != null && note.getTag().equalsIgnoreCase(tag)) {
+                filteredNotes.add(note);
+            }
+        }
+        updateAdapter();
+    }
+    public void filterByReadStatus(boolean isRead) {
+        filteredNotes.clear();
+        for (MOMNote note : momNotes) {
+            if (note.isRead() == isRead) {
+                filteredNotes.add(note);
+            }
+        }
+        updateAdapter();
+    }
+    public void clearFilter() {
+        filteredNotes.clear();
+        filteredNotes.addAll(momNotes);
+        updateAdapter();
+    }
+    public static void deleteNoteByTimestamp(long timestamp) {
+        for (int i = 0; i < momNotes.size(); i++) {
+            if (momNotes.get(i).getTimestamp() == timestamp) {
+                momNotes.remove(i);
+                break;
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,24 +69,23 @@ public class MOMListActivity extends Activity {
 
         listView = (ListView) findViewById(R.id.mom_list_view);
 
-        momList = new ArrayList<MOM>();
-        // TODO: Load actual MOM list from local DB or synced data
-
-        momList.add(new MOM("Client Meeting", "2025-08-10", "Work", false));
-        momList.add(new MOM("Study Group", "2025-08-09", "School", true));
-
-        adapter = new MOMAdapter(this, momList);
+        filteredNotes.addAll(momNotes);
+        adapter = new MOMAdapter(this, filteredNotes);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MOM mom = momList.get(position);
+                MOMNote note = momNotes.get(position);
+                note.setRead(true);
                 Intent intent = new Intent(MOMListActivity.this, MOMDetailActivity.class);
-                intent.putExtra("mom_title", mom.getTitle());
-                intent.putExtra("mom_date", mom.getDate());
-                intent.putExtra("mom_tag", mom.getTag());
-                intent.putExtra("mom_read", mom.isRead());
+                intent.putExtra("title", note.getTitle());
+                intent.putExtra("summary", note.getSummary());
+                intent.putExtra("action_points", note.getActionPoints());
+                intent.putExtra("minutes", note.getMinutes());
+                intent.putExtra("timestamp", note.getTimestamp());
+                intent.putExtra("tag", note.getTag());
+                intent.putExtra("isRead", note.isRead());
                 startActivity(intent);
             }
         });

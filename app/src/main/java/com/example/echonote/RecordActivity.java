@@ -1,18 +1,29 @@
 package com.example.echonote;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.shared.AudioRecorderHelper;
+import com.google.android.gms.wearable.Node;
+import com.google.android.gms.wearable.Wearable;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnFailureListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecordActivity extends Activity {
 
     private Button btnStart, btnStop;
-    private AudioRecorderHelper recorderHelper;
     private boolean isRecording = false;
+    private TextView tvRecordStatus;
+    private ImageView ivRecordIcon;
+    private static final int SPEECH_REQUEST_CODE = 1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,41 +32,56 @@ public class RecordActivity extends Activity {
 
         btnStart = findViewById(R.id.btn_start);
         btnStop = findViewById(R.id.btn_stop);
-
-        recorderHelper = new AudioRecorderHelper();
+        tvRecordStatus = findViewById(R.id.tv_record_status);
+        ivRecordIcon = findViewById(R.id.iv_record_icon);
 
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!isRecording) {
-                    boolean started = recorderHelper.startRecording("recording_" + System.currentTimeMillis() + ".3gp");
-                    if (started) {
-                        Toast.makeText(RecordActivity.this, "Recording started", Toast.LENGTH_SHORT).show();
-                        isRecording = true;
-                    } else {
-                        Toast.makeText(RecordActivity.this, "Failed to start recording", Toast.LENGTH_SHORT).show();
-                    }
-                }
+                startSpeechRecognition();
             }
         });
+        btnStop.setVisibility(View.GONE); // Hide stop button for speech recognition
+    }
 
-        btnStop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isRecording) {
-                    recorderHelper.stopRecording();
-                    Toast.makeText(RecordActivity.this, "Recording stopped.\nSaved to:\n" + recorderHelper.getOutputFilePath(), Toast.LENGTH_LONG).show();
-                    isRecording = false;
-                }
+    private void startSpeechRecognition() {
+        Intent intent = new Intent(android.speech.RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(android.speech.RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                android.speech.RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(android.speech.RecognizerIntent.EXTRA_PROMPT, "Speak now...");
+        startActivityForResult(intent, SPEECH_REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SPEECH_REQUEST_CODE && resultCode == RESULT_OK) {
+            ArrayList<String> results = data.getStringArrayListExtra(android.speech.RecognizerIntent.EXTRA_RESULTS);
+            if (results != null && !results.isEmpty()) {
+                String recognizedText = results.get(0);
+                tvRecordStatus.setText("Recognized: " + recognizedText);
+                sendTextToMobile(recognizedText);
+            }
+        }
+    }
+
+    private void sendTextToMobile(String text) {
+        Wearable.getNodeClient(this).getConnectedNodes().addOnSuccessListener(nodes -> {
+            if (nodes == null || nodes.isEmpty()) {
+                Toast.makeText(RecordActivity.this, "No connected phone found. Please ensure your phone is paired and nearby.", Toast.LENGTH_LONG).show();
+                return;
+            }
+            for (Node node : nodes) {
+                Wearable.getMessageClient(RecordActivity.this)
+                    .sendMessage(node.getId(), "/recognized_text", text.getBytes())
+                    .addOnSuccessListener(aVoid -> Toast.makeText(RecordActivity.this, "Text sent to phone!", Toast.LENGTH_SHORT).show())
+                    .addOnFailureListener(e -> Toast.makeText(RecordActivity.this, "Failed to send text to phone.", Toast.LENGTH_SHORT).show());
             }
         });
     }
 
     @Override
     protected void onDestroy() {
-        if (isRecording) {
-            recorderHelper.stopRecording();
-        }
         super.onDestroy();
     }
 }

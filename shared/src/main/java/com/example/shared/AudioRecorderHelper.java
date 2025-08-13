@@ -1,5 +1,6 @@
 package com.example.shared; // Or your chosen package for shared code
 
+import android.content.Context;
 import android.media.MediaRecorder;
 import android.os.Environment;
 
@@ -16,8 +17,10 @@ public class AudioRecorderHelper {
 
     private MediaRecorder recorder;
     private String outputFilePath;
+    private Context context;
 
-    public AudioRecorderHelper() {
+    public AudioRecorderHelper(Context context) {
+        this.context = context;
     }
 
     /**
@@ -31,29 +34,23 @@ public class AudioRecorderHelper {
             if (recorder != null) {
                 stopRecording();
             }
-
-            outputFilePath = Environment.getExternalStorageDirectory().getAbsolutePath()
-                    + "/EchoNoteAudio/" + fileName;
-
-            // Make sure directory exists
-            java.io.File folder = new java.io.File(Environment.getExternalStorageDirectory(), "EchoNoteAudio");
-            if (!folder.exists()) {
-                folder.mkdirs();
+            java.io.File dir = context.getExternalFilesDir("EchoNoteAudio");
+            if (dir != null && !dir.exists()) {
+                dir.mkdirs();
             }
-
+            outputFilePath = dir.getAbsolutePath() + "/" + fileName;
             recorder = new MediaRecorder();
             recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
             recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
             recorder.setOutputFile(outputFilePath);
-
             recorder.prepare();
             recorder.start();
 
             Log.d(TAG, "Recording started: " + outputFilePath);
             return true;
-        } catch (IOException e) {
-            Log.e(TAG, "startRecording failed", e);
+        } catch (Exception e) {
+            Log.e(TAG, "startRecording failed: " + e.getMessage());
             return false;
         }
     }

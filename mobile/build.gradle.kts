@@ -53,11 +53,12 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-
+    implementation("com.google.android.gms:play-services-wearable:19.0.0")
     implementation("org.apache.poi:poi:5.2.3")
     implementation("org.apache.poi:poi-ooxml:5.2.3")
     implementation(project(":shared"))
-
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.google.code.gson:gson:2.10.1")
 
 
     testImplementation(libs.junit)
