@@ -32,12 +32,15 @@
             android:text="Tag"
             android:layout_marginTop="8dp" />
 
+
         <TextView
-            android:id="@+id/tv_read"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_details"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Read/Unread"
-            android:layout_marginTop="8dp" />
+            android:text="Meeting Minutes Details"
+            android:layout_marginTop="8dp"
+            android:scrollbars="vertical"
+            android:padding="4dp" />
 
         <Button
             android:id="@+id/btn_play"

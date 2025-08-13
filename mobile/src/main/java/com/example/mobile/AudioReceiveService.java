@@ -12,6 +12,8 @@ import android.util.Log;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.example.mobile.EditSummary.EditSummaryActivity;
+import com.example.mobile.MOMNewList.MOMListActivity;
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.WearableListenerService;
 

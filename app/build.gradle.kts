@@ -15,6 +15,11 @@ android {
 
     }
 
+    buildFeatures {
+        compose = true
+        viewBinding = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -41,4 +46,5 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.wear)
     implementation(libs.gms.play.services.wearable)
+    implementation(libs.gson)
 }

@@ -1,13 +1,15 @@
 // app/src/main/java/com/example/mobile/MOMAdapter.java
-package com.example.mobile;
+package com.example.mobile.MOMNewList;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.example.mobile.MOMNote;
+import com.example.mobile.R;
 
 import java.util.List;
 

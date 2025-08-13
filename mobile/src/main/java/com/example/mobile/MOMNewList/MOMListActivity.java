@@ -1,7 +1,10 @@
 // app/src/main/java/com/example/mobile/MOMListActivity.java
-package com.example.mobile;
+package com.example.mobile.MOMNewList;
 
-import com.example.shared.MOM;  // if you actually use this
+import com.example.mobile.AudioReceiveService;
+import com.example.mobile.EditSummary.EditSummaryActivity;
+import com.example.mobile.MOMNote;
+import com.example.mobile.R;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -89,17 +92,17 @@ public class MOMListActivity extends Activity {
             // IMPORTANT: read from filteredNotes, not momNotes
             MOMNote note = filteredNotes.get(position);
             note.setRead(true);
-
-            Intent intent = new Intent(MOMListActivity.this, MOMDetailActivity.class);
-            intent.putExtra("title", note.getTitle());
-            intent.putExtra("summary", note.getSummary());
-            intent.putExtra("action_points", note.getActionPoints());
-            intent.putExtra("minutes", note.getMinutes());
-            intent.putExtra("timestamp", note.getTimestamp());
-            intent.putExtra("tag", note.getTag());
-            intent.putExtra("isRead", note.isRead());
-            startActivity(intent);
+            Intent editIntent = new Intent(MOMListActivity.this, EditSummaryActivity.class);
+            editIntent.putExtra("title", "");
+            editIntent.putExtra("summary", "");
+            editIntent.putExtra("action_points", "");
+            editIntent.putExtra("minutes", note.getMinutes());
+            editIntent.putExtra("timestamp", note.getTimestamp());
+            editIntent.putExtra("tag", "");
+            startActivity(editIntent);
+            finish();
         });
+
     }
 
     @Override

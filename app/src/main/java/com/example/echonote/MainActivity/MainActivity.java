@@ -1,4 +1,4 @@
-package com.example.echonote;
+package com.example.echonote.MainActivity;
 
 import android.Manifest;
 import android.app.Activity;
@@ -6,26 +6,26 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.echonote.R;
+import com.example.echonote.RecordActivity.RecordActivity;
+import com.example.echonote.databinding.ActivityMainBinding;
+
 public class MainActivity extends Activity {
 
-    private Button btnRecord;
-    private Button btnMOMList;
+    private ActivityMainBinding binding;
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        btnRecord = (Button) findViewById(R.id.btn_record);
-        btnMOMList = (Button) findViewById(R.id.btn_mom_list);
-
-        btnRecord.setOnClickListener(new View.OnClickListener() {
+        binding.btnRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
@@ -37,10 +37,10 @@ public class MainActivity extends Activity {
             }
         });
 
-        btnMOMList.setOnClickListener(new View.OnClickListener() {
+        binding.btnMomList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MOMListActivity.class);
+                Intent intent = new Intent(MainActivity.this, com.example.echonote.MOMTagList.MOMTagListActivity.class);
                 startActivity(intent);
             }
         });
