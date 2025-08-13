@@ -1,22 +1,19 @@
-package com.example.echonote;
+package com.example.echonote.RecordActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.echonote.R;
 import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.Wearable;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.OnFailureListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RecordActivity extends Activity {
 
@@ -56,7 +53,7 @@ public class RecordActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        sendTextToMobile("Hi guys we need to complete this project by end of the week and we need to show demo to client in 1st week of sepetember and apart from that do you have any other questions?");
+        sendTextToMobile("Hi guys we need to complete this project by end of the week and we need to show demo to client in 1st week of sepetember and apart from that do you have any other questions?");
         if (requestCode == SPEECH_REQUEST_CODE && resultCode == RESULT_OK) {
             ArrayList<String> results = data.getStringArrayListExtra(android.speech.RecognizerIntent.EXTRA_RESULTS);
             if (results != null && !results.isEmpty()) {
