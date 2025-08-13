@@ -6,11 +6,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
-
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
-import com.example.echonote.R;
 import com.example.echonote.RecordActivity.RecordActivity;
 import com.example.echonote.databinding.ActivityMainBinding;
 

@@ -9,4 +9,11 @@
     <string name="failed_to_start_recording">Failed to start recording</string>
     <string name="record_status_recording">Recording...</string>
     <string name="record_status_failed">Recording failed</string>
+    <string name="record_meeting">Record Meeting</string>
+    <string name="view_mom_list">View MOM List</string>
+    <string name="title">Title</string>
+    <string name="date">Date</string>
+    <string name="tag">Tag</string>
+    <string name="details">Details</string>
+    <string name="playaudio">Play Audio</string>
 </resources>

@@ -14,39 +14,39 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title"
-            android:textSize="20sp"
+            android:text="@string/title"
+            android:textSize="@dimen/mom_detail_title_text_size"
             android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date"
-            android:layout_marginTop="8dp" />
+            android:text="@string/date"
+            android:layout_marginTop="@dimen/mom_detail_margin_top" />
 
         <TextView
             android:id="@+id/tv_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tag"
-            android:layout_marginTop="8dp" />
+            android:text="@string/tag"
+            android:layout_marginTop="@dimen/mom_detail_margin_top" />
 
 
         <TextView
             android:id="@+id/tv_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Meeting Minutes Details"
-            android:layout_marginTop="8dp"
+            android:text="@string/details"
+            android:layout_marginTop="@dimen/mom_detail_margin_top"
             android:scrollbars="vertical"
-            android:padding="4dp" />
+            android:padding="@dimen/mom_detail_details_padding" />
 
         <Button
             android:id="@+id/btn_play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Play Audio"
+            android:text="@string/playaudio"
             android:layout_marginTop="16dp" />
     </LinearLayout>
 </ScrollView>
