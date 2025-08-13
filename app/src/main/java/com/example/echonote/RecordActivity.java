@@ -56,6 +56,7 @@ public class RecordActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+//        sendTextToMobile("Hi guys we need to complete this project by end of the week and we need to show demo to client in 1st week of sepetember and apart from that do you have any other questions?");
         if (requestCode == SPEECH_REQUEST_CODE && resultCode == RESULT_OK) {
             ArrayList<String> results = data.getStringArrayListExtra(android.speech.RecognizerIntent.EXTRA_RESULTS);
             if (results != null && !results.isEmpty()) {

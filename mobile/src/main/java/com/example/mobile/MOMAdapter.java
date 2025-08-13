@@ -1,3 +1,4 @@
+// app/src/main/java/com/example/mobile/MOMAdapter.java
 package com.example.mobile;
 
 import android.content.Context;
@@ -7,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.example.mobile.MOMNote;
 
 import java.util.List;
 
@@ -20,29 +19,23 @@ public class MOMAdapter extends ArrayAdapter<MOMNote> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         MOMNote note = getItem(position);
-
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_mom, parent, false);
         }
-
-        TextView minutesView = (TextView) convertView.findViewById(R.id.mom_minutes);
-        // Only display the minutes (recognized text)
+        TextView minutesView = convertView.findViewById(R.id.mom_minutes);
         minutesView.setText(note.getMinutes());
-        // Hide other views if present
-        TextView titleView = convertView.findViewById(R.id.mom_title);
-        TextView summaryView = convertView.findViewById(R.id.mom_summary);
-        TextView dateView = convertView.findViewById(R.id.mom_date);
-        TextView tagView = convertView.findViewById(R.id.mom_tag);
-        TextView readStatusView = convertView.findViewById(R.id.mom_read_status);
-        ProgressBar loader = convertView.findViewById(R.id.mom_loader);
-        TextView pendingMessage = convertView.findViewById(R.id.mom_pending_message);
-        if (titleView != null) titleView.setVisibility(View.GONE);
-        if (summaryView != null) summaryView.setVisibility(View.GONE);
-        if (dateView != null) dateView.setVisibility(View.GONE);
-        if (tagView != null) tagView.setVisibility(View.GONE);
-        if (readStatusView != null) readStatusView.setVisibility(View.GONE);
-        if (loader != null) loader.setVisibility(View.GONE);
-        if (pendingMessage != null) pendingMessage.setVisibility(View.GONE);
+
+        // hide other fields if they exist in layout
+        View[] maybe = new View[]{
+                convertView.findViewById(R.id.mom_title),
+                convertView.findViewById(R.id.mom_summary),
+                convertView.findViewById(R.id.mom_date),
+                convertView.findViewById(R.id.mom_tag),
+                convertView.findViewById(R.id.mom_read_status),
+                convertView.findViewById(R.id.mom_loader),
+                convertView.findViewById(R.id.mom_pending_message)
+        };
+        for (View v : maybe) if (v != null) v.setVisibility(View.GONE);
         return convertView;
     }
 }

@@ -21,40 +21,7 @@
             android:id="@+id/et_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Edit title"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp"/>
-
-        <TextView
-            android:id="@+id/tv_summary_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Short Summary"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginBottom="8dp"/>
-
-        <EditText
-            android:id="@+id/et_summary"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Edit summary"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp"/>
-
-        <TextView
-            android:id="@+id/tv_action_points_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Action Points"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginBottom="8dp"/>
-
-        <TextView
-            android:id="@+id/tv_action_points"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:hint="Enter title"
             android:textSize="16sp"
             android:layout_marginBottom="16dp"/>
 
@@ -62,7 +29,7 @@
             android:id="@+id/tv_minutes_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Minutes of Meeting"
+            android:text="Meeting Minutes (auto-generated)"
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_marginBottom="8dp"/>
@@ -71,8 +38,13 @@
             android:id="@+id/tv_minutes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Generating..."
             android:textSize="16sp"
-            android:layout_marginBottom="24dp"/>
+            android:background="#F5F5F5"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"
+            android:focusable="false"
+            android:clickable="false"/>
 
         <TextView
             android:id="@+id/tv_tag_label"
@@ -83,46 +55,27 @@
             android:textSize="18sp"
             android:layout_marginBottom="8dp"/>
 
-        <EditText
-            android:id="@+id/et_tag"
+        <Spinner
+            android:id="@+id/spinner_tags"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter tag"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="8dp"/>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btn_add_tag"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
-            <Button
-                android:id="@+id/btn_filter_tag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Filter by Tag"
-                android:layout_marginEnd="8dp"/>
-            <Button
-                android:id="@+id/btn_filter_read"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Show Read"
-                android:layout_marginEnd="8dp"/>
-            <Button
-                android:id="@+id/btn_filter_unread"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Show Unread"/>
-        </LinearLayout>
+            android:text="Add New Tag"
+            android:layout_marginBottom="16dp"/>
 
         <Button
             android:id="@+id/btn_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Save"
-            android:textSize="18sp"
-            android:backgroundTint="@color/design_default_color_primary"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="16dp"/>
+            android:backgroundTint="#2196F3"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_marginTop="24dp"/>
     </LinearLayout>
 </ScrollView>

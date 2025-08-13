@@ -7,6 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 
 public class MOMDetailActivity extends Activity {
 
@@ -64,8 +70,54 @@ public class MOMDetailActivity extends Activity {
         });
 
         btnExport.setOnClickListener(v -> {
-            // TODO: Export to Word file logic
-            Toast.makeText(MOMDetailActivity.this, "Exported as Word file (stub)", Toast.LENGTH_SHORT).show();
+            try {
+                // Gather MOM details
+                String title = titleView.getText().toString();
+                String date = dateView.getText().toString();
+                String tagValue = tagView.getText().toString(); // Avoid variable name conflict
+                String summary = summaryView.getText().toString();
+                String actionPoints = actionPointsView.getText().toString();
+                String minutes = minutesView.getText().toString();
+
+                // Create Word document
+                XWPFDocument doc = new XWPFDocument();
+                XWPFParagraph p1 = doc.createParagraph();
+                XWPFRun r1 = p1.createRun();
+                r1.setBold(true);
+                r1.setFontSize(18);
+                r1.setText("Minutes of Meeting");
+                r1.addBreak();
+
+                XWPFParagraph p2 = doc.createParagraph();
+                XWPFRun r2 = p2.createRun();
+                r2.setText("Title: " + title);
+                r2.addBreak();
+                r2.setText("Date: " + date);
+                r2.addBreak();
+                r2.setText("Tag: " + tagValue);
+                r2.addBreak();
+                r2.setText("Summary: " + summary);
+                r2.addBreak();
+                r2.setText("Action Points: " + actionPoints);
+                r2.addBreak();
+                r2.setText("Minutes:");
+                r2.addBreak();
+                r2.setText(minutes);
+
+                // Save to Downloads directory
+                String fileName = "MOM_" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(System.currentTimeMillis()) + ".docx";
+                File dir = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS);
+                if (dir != null && !dir.exists()) dir.mkdirs();
+                File file = new File(dir, fileName);
+                FileOutputStream fos = new FileOutputStream(file);
+                doc.write(fos);
+                fos.close();
+                doc.close();
+
+                Toast.makeText(MOMDetailActivity.this, "Exported as Word file: " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
+            } catch (Exception e) {
+                Toast.makeText(MOMDetailActivity.this, "Export failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            }
         });
     }
 
