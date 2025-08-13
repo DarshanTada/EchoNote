@@ -1,0 +1,7 @@
+<resources>
+    <dimen name="main_padding">16dp</dimen>
+    <dimen name="main_button_margin_top">16dp</dimen>
+    <dimen name="mom_detail_title_text_size">20sp</dimen>
+    <dimen name="mom_detail_margin_top">8dp</dimen>
+    <dimen name="mom_detail_details_padding">4dp</dimen>
+</resources>
