@@ -1,4 +1,4 @@
-package com.example.mobile;
+package com.example.echonote;
 
 import android.content.Context;
 import android.os.Environment;

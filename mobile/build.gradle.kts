@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.mobile"
+    namespace = "com.example.echonote"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.mobile"
+        applicationId = "com.example.echonote"
         minSdk = 26
         targetSdk = 36
         versionCode = 1
@@ -36,6 +36,7 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
 }
 
@@ -57,8 +58,10 @@ dependencies {
     implementation("org.apache.poi:poi:5.2.3")
     implementation("org.apache.poi:poi-ooxml:5.2.3")
     implementation(project(":shared"))
-
-
+    implementation("com.google.android.gms:play-services-wearable:18.1.0")
+    implementation(libs.media3.exoplayer)
+    implementation(libs.media3.ui)
+    implementation(libs.exoplayer)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

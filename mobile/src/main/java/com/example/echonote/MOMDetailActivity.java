@@ -1,48 +1,35 @@
-package com.example.mobile;
+package com.example.echonote;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class MOMDetailActivity extends Activity {
+import com.example.echonote.databinding.ActivityMomDetailBinding;
 
-    private TextView titleView, dateView, tagView, readView;
-    private Button btnConvertToText, btnEdit, btnDelete, btnExport;
+public class MOMDetailActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mom_detail);
+        ActivityMomDetailBinding binding = ActivityMomDetailBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        titleView = (TextView) findViewById(R.id.tv_title);
-        dateView = (TextView) findViewById(R.id.tv_date);
-        tagView = (TextView) findViewById(R.id.tv_tag);
-        readView = (TextView) findViewById(R.id.tv_read);
-
-        btnConvertToText = (Button) findViewById(R.id.btn_convert_text);
-        btnEdit = (Button) findViewById(R.id.btn_edit);
-        btnDelete = (Button) findViewById(R.id.btn_delete);
-        btnExport = (Button) findViewById(R.id.btn_export);
-
-        // Load data from intent
-        titleView.setText(getIntent().getStringExtra("mom_title"));
-        dateView.setText(getIntent().getStringExtra("mom_date"));
-        tagView.setText(getIntent().getStringExtra("mom_tag"));
+        binding.tvTitle.setText(getIntent().getStringExtra("mom_title"));
+        binding.tvDate.setText(getIntent().getStringExtra("mom_date"));
+        binding.tvTag.setText(getIntent().getStringExtra("mom_tag"));
         boolean isRead = getIntent().getBooleanExtra("mom_read", false);
-        readView.setText(isRead ? "Read" : "Unread");
+        binding.tvRead.setText(isRead ? "Read" : "Unread");
 
-        btnConvertToText.setOnClickListener(new View.OnClickListener() {
+        binding.btnConvertText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 convertVoiceToText();
             }
         });
 
-        btnEdit.setOnClickListener(new View.OnClickListener() {
+        binding.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MOMDetailActivity.this, MOMEditorActivity.class);
@@ -50,7 +37,7 @@ public class MOMDetailActivity extends Activity {
             }
         });
 
-        btnDelete.setOnClickListener(new View.OnClickListener() {
+        binding.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO: Delete logic
@@ -59,7 +46,7 @@ public class MOMDetailActivity extends Activity {
             }
         });
 
-        btnExport.setOnClickListener(new View.OnClickListener() {
+        binding.btnExport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO: Export to Word file logic

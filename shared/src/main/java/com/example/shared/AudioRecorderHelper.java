@@ -1,14 +1,10 @@
-package com.example.shared; // Or your chosen package for shared code
+package com.example.shared;
 
+import android.content.Context;
 import android.media.MediaRecorder;
-import android.os.Environment;
+import android.util.Log;
 
-import androidx.annotation.OptIn;
-import androidx.media3.common.util.Log;
-import androidx.media3.common.util.UnstableApi;
-
-import java.io.IOException;
-
+import java.io.File;
 
 public class AudioRecorderHelper {
 
@@ -20,31 +16,27 @@ public class AudioRecorderHelper {
     public AudioRecorderHelper() {
     }
 
-    /**
-     * Start recording audio to a file.
-     * @param fileName Name of the file (without path), e.g. "mom_recording_001.3gp"
-     * @return true if started successfully
-     */
-    @OptIn(markerClass = UnstableApi.class)
-    public boolean startRecording(String fileName) {
+    public boolean startRecording(Context context, String fileName) {
         try {
             if (recorder != null) {
                 stopRecording();
             }
 
-            outputFilePath = Environment.getExternalStorageDirectory().getAbsolutePath()
-                    + "/EchoNoteAudio/" + fileName;
-
-            // Make sure directory exists
-            java.io.File folder = new java.io.File(Environment.getExternalStorageDirectory(), "EchoNoteAudio");
+            File dir = context.getExternalFilesDir(null);
+            if (dir == null) {
+                Log.e(TAG, "External files dir is null");
+                return false;
+            }
+            File folder = new File(dir, "EchoNoteAudio");
             if (!folder.exists()) {
                 folder.mkdirs();
             }
+            outputFilePath = new File(folder, fileName).getAbsolutePath();
 
             recorder = new MediaRecorder();
             recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-            recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+            recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
             recorder.setOutputFile(outputFilePath);
 
             recorder.prepare();
@@ -52,22 +44,18 @@ public class AudioRecorderHelper {
 
             Log.d(TAG, "Recording started: " + outputFilePath);
             return true;
-        } catch (IOException e) {
-            Log.e(TAG, "startRecording failed", e);
+        } catch (Exception e) {
+            Log.e(TAG, "startRecording failed: " + e.getMessage(), e);
             return false;
         }
     }
 
-    /**
-     * Stop recording audio.
-     */
-    @OptIn(markerClass = UnstableApi.class)
     public void stopRecording() {
         if (recorder != null) {
             try {
                 recorder.stop();
             } catch (RuntimeException e) {
-                Log.e(TAG, "stopRecording failed, maybe nothing recorded", e);
+                Log.e(TAG, "stopRecording failed (maybe nothing recorded)", e);
             }
             recorder.release();
             recorder = null;
@@ -75,10 +63,6 @@ public class AudioRecorderHelper {
         }
     }
 
-    /**
-     * Get the path of the last recorded audio file.
-     * @return file path string
-     */
     public String getOutputFilePath() {
         return outputFilePath;
     }

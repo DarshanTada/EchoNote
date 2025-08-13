@@ -1,4 +1,4 @@
-package com.example.echonote;
+package com.example.echonote.ListActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.echonote.MOMAdapter;
+import com.example.echonote.MOMDetailActivity;
+import com.example.echonote.R;
 import com.example.shared.MOM;
 
 

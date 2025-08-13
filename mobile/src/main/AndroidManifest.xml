@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mobile">
+    package="com.example.echonote">
 
     <application
         android:allowBackup="true"
@@ -34,6 +34,60 @@
             android:label="MOM Details" >
         </activity>
 
+        <!-- Recording list activity -->
+        <activity
+            android:name=".RecordingListActivity"
+            android:exported="false"
+            android:label="Recording List" />
+
+        <!-- Video player activity -->
+        <activity
+            android:name=".VideoPlayerActivity"
+            android:exported="false"
+            android:label="Video Player" />
+
+        <!-- Service to listen for recordings -->
+        <service
+            android:name=".RecordingListenerService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".RecordingChannelService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
+            </intent-filter>
+        </service>
+
+        <service android:name=".WearDataListenerService" android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
+            </intent-filter>
+        </service>
+
+        <!-- FileProvider for sharing files -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.echonote.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
     </application>
+
+    <!-- Permissions for reading/writing audio files in external storage -->
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
 
 </manifest>
