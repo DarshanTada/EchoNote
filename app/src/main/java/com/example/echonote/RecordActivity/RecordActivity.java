@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class RecordActivity extends Activity {
 
     // UI elements
-    private Button btnStart, btnStop;
+    private Button btnStart;
     private TextView tvRecordStatus;
     private ImageView ivRecordIcon;
 
@@ -41,7 +41,6 @@ public class RecordActivity extends Activity {
 
         // Initialize UI components
         btnStart = findViewById(R.id.btn_start);
-        btnStop = findViewById(R.id.btn_stop);
         tvRecordStatus = findViewById(R.id.tv_record_status);
         ivRecordIcon = findViewById(R.id.iv_record_icon);
 
@@ -52,9 +51,6 @@ public class RecordActivity extends Activity {
                 startSpeechRecognition();
             }
         });
-
-        // Hide the stop button as speech recognition handles stopping automatically
-        btnStop.setVisibility(View.GONE);
     }
 
     /**
