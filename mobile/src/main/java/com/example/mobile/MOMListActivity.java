@@ -17,11 +17,17 @@ public class MOMListActivity extends Activity {
     private ListView listView;
     private MOMAdapter adapter;
     private static ArrayList<MOMNote> momNotes = new ArrayList<>();
-    private ArrayList<MOMNote> filteredNotes = new ArrayList<>();
+    private static ArrayList<MOMNote> filteredNotes = new ArrayList<>();
 
     public static void addNote(MOMNote note) {
         momNotes.add(note);
         Collections.sort(momNotes, (a, b) -> Long.compare(b.getTimestamp(), a.getTimestamp()));
+        // Also add to filteredNotes if no filter is applied
+        // If filteredNotes contains all notes, update it
+        if (filteredNotes.size() == momNotes.size() - 1 || filteredNotes.isEmpty()) {
+            filteredNotes.add(note);
+            Collections.sort(filteredNotes, (a, b) -> Long.compare(b.getTimestamp(), a.getTimestamp()));
+        }
     }
 
     private void updateAdapter() {
@@ -89,5 +95,16 @@ public class MOMListActivity extends Activity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Refresh filteredNotes and notify adapter
+        filteredNotes.clear();
+        filteredNotes.addAll(momNotes);
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
     }
 }

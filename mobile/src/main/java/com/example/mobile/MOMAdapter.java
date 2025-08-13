@@ -25,30 +25,24 @@ public class MOMAdapter extends ArrayAdapter<MOMNote> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_mom, parent, false);
         }
 
-        TextView titleView = (TextView) convertView.findViewById(R.id.mom_title);
-        TextView summaryView = (TextView) convertView.findViewById(R.id.mom_summary);
-        TextView dateView = (TextView) convertView.findViewById(R.id.mom_date);
+        TextView minutesView = (TextView) convertView.findViewById(R.id.mom_minutes);
+        // Only display the minutes (recognized text)
+        minutesView.setText(note.getMinutes());
+        // Hide other views if present
+        TextView titleView = convertView.findViewById(R.id.mom_title);
+        TextView summaryView = convertView.findViewById(R.id.mom_summary);
+        TextView dateView = convertView.findViewById(R.id.mom_date);
         TextView tagView = convertView.findViewById(R.id.mom_tag);
         TextView readStatusView = convertView.findViewById(R.id.mom_read_status);
         ProgressBar loader = convertView.findViewById(R.id.mom_loader);
         TextView pendingMessage = convertView.findViewById(R.id.mom_pending_message);
-
-        titleView.setText(note.getTitle());
-        dateView.setText(android.text.format.DateFormat.format("yyyy-MM-dd HH:mm", note.getTimestamp()));
-        tagView.setText(note.getTag());
-        readStatusView.setText(note.isRead() ? "Read" : "Unread");
-
-        if (note.isSummaryPending()) {
-            summaryView.setVisibility(View.GONE);
-            loader.setVisibility(View.VISIBLE);
-            pendingMessage.setVisibility(View.VISIBLE);
-        } else {
-            summaryView.setVisibility(View.VISIBLE);
-            summaryView.setText(note.getSummary());
-            loader.setVisibility(View.GONE);
-            pendingMessage.setVisibility(View.GONE);
-        }
-
+        if (titleView != null) titleView.setVisibility(View.GONE);
+        if (summaryView != null) summaryView.setVisibility(View.GONE);
+        if (dateView != null) dateView.setVisibility(View.GONE);
+        if (tagView != null) tagView.setVisibility(View.GONE);
+        if (readStatusView != null) readStatusView.setVisibility(View.GONE);
+        if (loader != null) loader.setVisibility(View.GONE);
+        if (pendingMessage != null) pendingMessage.setVisibility(View.GONE);
         return convertView;
     }
 }

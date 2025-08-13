@@ -7,7 +7,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.echonote"
+        applicationId = "com.example.mobile"
         minSdk = 30
         targetSdk = 36
         versionCode = 1
@@ -40,4 +40,5 @@ dependencies {
 
     implementation(libs.constraintlayout)
     implementation(libs.wear)
+    implementation(libs.gms.play.services.wearable)
 }

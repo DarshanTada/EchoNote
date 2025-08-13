@@ -3,6 +3,7 @@ package com.example.echonote;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -68,6 +69,7 @@ public class RecordActivity extends Activity {
     private void sendTextToMobile(String text) {
         Wearable.getNodeClient(this).getConnectedNodes().addOnSuccessListener(nodes -> {
             if (nodes == null || nodes.isEmpty()) {
+//                Log.d("RecordActivity", "Connected node: " + node.getDisplayName());
                 Toast.makeText(RecordActivity.this, "No connected phone found. Please ensure your phone is paired and nearby.", Toast.LENGTH_LONG).show();
                 return;
             }
