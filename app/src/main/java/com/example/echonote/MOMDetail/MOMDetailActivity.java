@@ -61,25 +61,25 @@ public class MOMDetailActivity extends AppCompatActivity {
             }
         });
 
-//        // Handle TTS utterance progress to update UI after speech
-//        tts.setOnUtteranceProgressListener(new android.speech.tts.UtteranceProgressListener() {
-//            @Override
-//            public void onStart(String utteranceId) {
-//                // Called when TTS starts speaking
-//            }
-//
-//            @Override
-//            public void onDone(String utteranceId) {
-//                // Reset the play button text to "Play" after TTS finishes
-//                runOnUiThread(() -> binding.btnPlay.setText("Play"));
-//            }
-//
-//            @Override
-//            public void onError(String utteranceId) {
-//                // Show error message if TTS fails
-//                runOnUiThread(() -> Toast.makeText(MOMDetailActivity.this, "Error speaking text", Toast.LENGTH_SHORT).show());
-//            }
-//        });
+        // Handle TTS utterance progress to update UI after speech
+        tts.setOnUtteranceProgressListener(new android.speech.tts.UtteranceProgressListener() {
+            @Override
+            public void onStart(String utteranceId) {
+                // Called when TTS starts speaking
+            }
+
+            @Override
+            public void onDone(String utteranceId) {
+                // Reset the play button text to "Play" after TTS finishes
+                runOnUiThread(() -> binding.btnPlay.setText("Play"));
+            }
+
+            @Override
+            public void onError(String utteranceId) {
+                // Show error message if TTS fails
+                runOnUiThread(() -> Toast.makeText(MOMDetailActivity.this, "Error speaking text", Toast.LENGTH_SHORT).show());
+            }
+        });
 
         // Set click listener for Play/Stop button
         binding.btnPlay.setOnClickListener(v -> toggleSpeech());
