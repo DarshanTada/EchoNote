@@ -1,7 +1,12 @@
 package com.example.mobile;
 
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.WearableListenerService;
@@ -17,7 +22,7 @@ public class WearMessageListenerService extends WearableListenerService {
             String recognizedText = new String(messageEvent.getData());
             Log.d(TAG, "Received from watch: " + recognizedText);
 
-            // Add note to MOM list
+            // Create MOM note
             MOMNote note = new MOMNote(
                     recognizedText,
                     "Speech from watch",
@@ -26,14 +31,24 @@ public class WearMessageListenerService extends WearableListenerService {
                     System.currentTimeMillis(),
                     "Voice",
                     false,
-                    false // isSummaryPending
+                    false
             );
+
+            // Add note to static list
             MOMListActivity.addNote(note);
 
-            // Optional toast (runs in background thread so use handler)
-            new android.os.Handler(getMainLooper()).post(() ->
-                    Toast.makeText(getApplicationContext(), "Note received from watch!", Toast.LENGTH_SHORT).show()
+            // Broadcast update to MOMListActivity
+            Intent intent = new Intent("com.example.mobile.MOM_UPDATE");
+            intent.putExtra("new_note_text", recognizedText);
+            LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+
+            // Show a toast on main thread
+            new Handler(Looper.getMainLooper()).post(() ->
+                    Toast.makeText(getApplicationContext(),
+                            "Note received from watch!",
+                            Toast.LENGTH_SHORT).show()
             );
+
         } else {
             super.onMessageReceived(messageEvent);
         }
