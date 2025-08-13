@@ -1,10 +1,4 @@
-// app/src/main/java/com/example/mobile/MOMListActivity.java
 package com.example.mobile.MOMNewList;
-
-import com.example.mobile.AudioReceiveService;
-import com.example.mobile.EditSummary.EditSummaryActivity;
-import com.example.mobile.MOMNote;
-import com.example.mobile.R;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -13,33 +7,56 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.widget.AdapterView;
-import android.widget.ListView;
+
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import com.example.mobile.AudioReceiveService;
+import com.example.mobile.EditSummary.EditSummaryActivity;
+import com.example.mobile.MOMNote;
+import com.example.mobile.databinding.ActivityMomListBinding;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class MOMListActivity extends Activity {
 
-    private ListView listView;
+    // Use View Binding instead of findViewById
+    private ActivityMomListBinding binding;
+
+    // Adapter for the ListView
     private MOMAdapter adapter;
+
+    // Master list of all notes
     private static final ArrayList<MOMNote> momNotes = new ArrayList<>();
+
+    // Currently displayed notes (filtered or full list)
     private static final ArrayList<MOMNote> filteredNotes = new ArrayList<>();
 
+    /**
+     * Adds a new MOM note and keeps the lists sorted by timestamp (latest first)
+     */
     public static void addNote(MOMNote note) {
         momNotes.add(note);
+        // Sort master list by timestamp descending
         Collections.sort(momNotes, (a, b) -> Long.compare(b.getTimestamp(), a.getTimestamp()));
-        // keep filtered in sync if it's showing "all"
+
+        // Keep filtered list in sync if it's currently showing all notes
         if (filteredNotes.isEmpty() || filteredNotes.size() == momNotes.size() - 1) {
             filteredNotes.add(note);
             Collections.sort(filteredNotes, (a, b) -> Long.compare(b.getTimestamp(), a.getTimestamp()));
         }
     }
 
+    /**
+     * Refresh the adapter to update the ListView
+     */
     private void updateAdapter() {
         if (adapter != null) adapter.notifyDataSetChanged();
     }
 
+    /**
+     * Filter notes by a specific tag
+     */
     public void filterByTag(String tag) {
         filteredNotes.clear();
         for (MOMNote note : momNotes) {
@@ -50,6 +67,9 @@ public class MOMListActivity extends Activity {
         updateAdapter();
     }
 
+    /**
+     * Filter notes by read/unread status
+     */
     public void filterByReadStatus(boolean isRead) {
         filteredNotes.clear();
         for (MOMNote note : momNotes) {
@@ -60,12 +80,18 @@ public class MOMListActivity extends Activity {
         updateAdapter();
     }
 
+    /**
+     * Clear all filters and show all notes
+     */
     public void clearFilter() {
         filteredNotes.clear();
         filteredNotes.addAll(momNotes);
         updateAdapter();
     }
 
+    /**
+     * Delete a note by its timestamp
+     */
     public static void deleteNoteByTimestamp(long timestamp) {
         for (int i = 0; i < momNotes.size(); i++) {
             if (momNotes.get(i).getTimestamp() == timestamp) {
@@ -78,20 +104,28 @@ public class MOMListActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mom_list);
 
-        listView = findViewById(R.id.mom_list_view);
+        // Initialize view binding
+        binding = ActivityMomListBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
+        // Initialize filtered list
         filteredNotes.clear();
         filteredNotes.addAll(momNotes);
 
+        // Set up adapter with filtered notes
         adapter = new MOMAdapter(this, filteredNotes);
-        listView.setAdapter(adapter);
+        binding.momListView.setAdapter(adapter);
 
-        listView.setOnItemClickListener((AdapterView<?> parent, android.view.View view, int position, long id) -> {
-            // IMPORTANT: read from filteredNotes, not momNotes
+        // Handle item clicks
+        binding.momListView.setOnItemClickListener((AdapterView<?> parent, android.view.View view, int position, long id) -> {
+            // Get note from filtered list
             MOMNote note = filteredNotes.get(position);
+
+            // Mark as read
             note.setRead(true);
+
+            // Open EditSummaryActivity with note data
             Intent editIntent = new Intent(MOMListActivity.this, EditSummaryActivity.class);
             editIntent.putExtra("title", "");
             editIntent.putExtra("summary", "");
@@ -100,32 +134,39 @@ public class MOMListActivity extends Activity {
             editIntent.putExtra("timestamp", note.getTimestamp());
             editIntent.putExtra("tag", "");
             startActivity(editIntent);
+
+            // Finish current activity to refresh the list when returning
             finish();
         });
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        // keep list current
+
+        // Refresh filtered list and adapter in case new notes were added
         filteredNotes.clear();
         filteredNotes.addAll(momNotes);
         updateAdapter();
 
-        // listen for updates pushed by AudioReceiveService
+        // Register BroadcastReceiver to listen for updates from AudioReceiveService
         LocalBroadcastManager.getInstance(this).registerReceiver(updateReceiver,
                 new IntentFilter(AudioReceiveService.ACTION_MOM_UPDATE));
     }
 
     @Override
     protected void onPause() {
+        // Unregister BroadcastReceiver
         LocalBroadcastManager.getInstance(this).unregisterReceiver(updateReceiver);
         super.onPause();
     }
 
+    /**
+     * BroadcastReceiver to refresh the ListView when new notes are received
+     */
     private final BroadcastReceiver updateReceiver = new BroadcastReceiver() {
-        @Override public void onReceive(Context context, Intent intent) {
+        @Override
+        public void onReceive(Context context, Intent intent) {
             filteredNotes.clear();
             filteredNotes.addAll(momNotes);
             updateAdapter();
