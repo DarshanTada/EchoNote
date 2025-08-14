@@ -4,16 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:fitsSystemWindows="true">
 
     <!-- Top Bar with App Name -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/topBar"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/zero_dp"
         android:layout_height="wrap_content"
-        android:background="#EFE9E1"
-        app:title="EchoNote"
-        app:titleTextColor="#322D29"
+        android:background="@color/topbar_bg"
+        app:title="@string/app_name"
+        app:titleTextColor="@color/topbar_text"
         app:titleTextAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,19 +24,15 @@
     <!-- Button at the top -->
     <Button
         android:id="@+id/btn_mom_list"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="View New List"
-        android:layout_margin="16dp"
-        android:background="#72383D"
-        android:textColor="#FFFFFF"
-        android:padding="12dp"
+        android:text="@string/view_new_list"
+        android:layout_margin="@dimen/main_button_margin"
+        android:background="@drawable/rounded_button_bg"
+        android:textColor="@color/white"
+        android:textSize="@dimen/main_button_padding"
         android:gravity="center"
         android:clipToOutline="true"
-        android:backgroundTint="#72383D"
-        android:backgroundTintMode="src_in"
-        android:shape="rectangle"
-        android:radius="24dp"
         app:layout_constraintTop_toBottomOf="@id/topBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,26 +41,26 @@
     <!-- CardView below the button -->
     <androidx.cardview.widget.CardView
         android:id="@+id/tagCard"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
-        app:cardBackgroundColor="#EFE9E1"
+        android:layout_width="@dimen/zero_dp"
+        android:layout_height="@dimen/zero_dp"
+        android:layout_margin="@dimen/main_card_margin"
+        app:cardCornerRadius="@dimen/main_card_radius"
+        app:cardElevation="@dimen/main_card_elevation"
+        app:cardBackgroundColor="@color/card_bg"
         app:layout_constraintTop_toBottomOf="@id/btn_mom_list"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="#EFE9E1">
+        android:background="@color/card_bg">
 
         <ListView
             android:id="@+id/tagListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="#322D29"
-            android:dividerHeight="1dp"
-            android:padding="8dp"
-            android:background="#EFE9E1" />
+            android:divider="@color/list_divider"
+            android:dividerHeight="@dimen/list_divider_height"
+            android:padding="@dimen/list_padding"
+            android:background="@color/card_bg" />
 
     </androidx.cardview.widget.CardView>
 

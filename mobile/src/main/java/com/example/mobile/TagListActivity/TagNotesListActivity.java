@@ -69,5 +69,18 @@ public class TagNotesListActivity extends Activity {
             editIntent.putExtra("tag", note.getTags() != null && !note.getTags().isEmpty() ? note.getTags().get(0) : "");
             startActivity(editIntent);
         });
+
+        // Set up back button functionality for Toolbar
+        if (binding.topBar != null) {
+            binding.topBar.setNavigationOnClickListener(v -> {
+                // If using fragments, pop the back stack
+                if (getFragmentManager().getBackStackEntryCount() > 0) {
+                    getFragmentManager().popBackStack();
+                } else {
+                    // Otherwise, finish the activity
+                    finish();
+                }
+            });
+        }
     }
 }

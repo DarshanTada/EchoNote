@@ -5,18 +5,23 @@
     android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/main_padding">
+    android:padding="@dimen/main_padding"
+    android:background="#000000">
 
     <Button
         android:id="@+id/btn_record"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/main_button_width"
         android:layout_height="wrap_content"
-        android:text="@string/record_meeting" />
+        android:text="@string/record_meeting"
+        android:background="@drawable/rounded_button_bg"
+        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/btn_mom_list"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/main_button_width"
         android:layout_height="wrap_content"
         android:text="@string/view_mom_list"
-        android:layout_marginTop="@dimen/main_button_margin_top"/>
+        android:layout_marginTop="@dimen/main_button_margin_top"
+        android:background="@drawable/rounded_button_bg"
+        android:textColor="@color/white"/>
 </LinearLayout>

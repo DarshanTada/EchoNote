@@ -3,50 +3,62 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
-    android:fitsSystemWindows="true">
+    android:padding="@dimen/edit_summary_padding"
+    android:fitsSystemWindows="true"
+    android:background="@color/main_bg">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
+        android:layout_marginLeft="@dimen/edit_summary_margin_horizontal"
+        android:layout_marginRight="@dimen/edit_summary_margin_horizontal">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/topbar_bg"
+            app:title="@string/mom_list_title"
+            app:titleTextColor="@color/topbar_text"
+            app:titleTextAppearance="@style/TextAppearance.AppCompat.Large"
+            app:navigationIcon="@drawable/baseline_arrow_back"/>
 
         <TextView
+            android:layout_marginTop="@dimen/edit_summary_margin_bottom"
             android:id="@+id/tv_title_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Title"
+            android:text="@string/title_label"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginBottom="8dp"/>
+            android:textSize="@dimen/edit_summary_title_text_size"
+            android:layout_marginBottom="@dimen/edit_summary_margin_bottom"/>
 
         <EditText
             android:id="@+id/et_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter title"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp"/>
+            android:hint="@string/title_hint"
+            android:textSize="@dimen/edit_summary_edit_text_size"
+            android:layout_marginBottom="@dimen/edit_summary_margin_bottom_large"/>
 
         <TextView
             android:id="@+id/tv_minutes_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Meeting Minutes (auto-generated)"
+            android:text="@string/minutes_label"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginBottom="8dp"/>
+            android:textSize="@dimen/edit_summary_title_text_size"
+            android:layout_marginBottom="@dimen/edit_summary_margin_bottom"/>
 
         <TextView
             android:id="@+id/tv_minutes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Generating..."
-            android:textSize="16sp"
-            android:background="#F5F5F5"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"
+            android:text="@string/minutes_generating"
+            android:textSize="@dimen/edit_summary_edit_text_size"
+            android:background="@color/minutes_background"
+            android:padding="@dimen/edit_summary_minutes_padding"
+            android:layout_marginBottom="@dimen/edit_summary_margin_bottom_large"
             android:focusable="false"
             android:clickable="false"/>
 
@@ -54,42 +66,42 @@
             android:id="@+id/tv_tag_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tag"
+            android:text="@string/tag_label"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginBottom="8dp"/>
+            android:textSize="@dimen/edit_summary_title_text_size"
+            android:layout_marginBottom="@dimen/edit_summary_margin_bottom"/>
 
         <Spinner
             android:id="@+id/spinner_tags"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="@dimen/edit_summary_margin_bottom"/>
 
         <Button
             android:id="@+id/btn_add_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add New Tag"
-            android:layout_marginBottom="16dp"/>
+            android:text="@string/add_tag"
+            android:layout_marginBottom="@dimen/edit_summary_margin_bottom_large"/>
 
         <Button
             android:id="@+id/btn_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save"
-            android:backgroundTint="#2196F3"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:layout_marginTop="24dp"/>
+            android:text="@string/save"
+            android:background="@drawable/rounded_button_bg"
+            android:textColor="@color/white"
+            android:textSize="@dimen/edit_summary_button_text_size"
+            android:layout_marginTop="@dimen/edit_summary_margin_top_large"/>
 
         <Button
             android:id="@+id/btn_export"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Export"
-            android:backgroundTint="#4CAF50"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:layout_marginTop="12dp"/>
+            android:text="@string/export"
+            android:background="@drawable/rounded_button_bg"
+            android:textColor="@color/white"
+            android:textSize="@dimen/edit_summary_button_text_size"
+            android:layout_marginTop="@dimen/edit_summary_margin_top"/>
     </LinearLayout>
 </ScrollView>

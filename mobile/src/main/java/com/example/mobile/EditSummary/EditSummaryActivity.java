@@ -1,6 +1,5 @@
 package com.example.mobile.EditSummary;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +10,8 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mobile.MainActivity.MainActivity_mobile;
 import com.example.mobile.databinding.ActivityEditSummaryBinding;
@@ -51,7 +52,7 @@ import okhttp3.Response;
  *  - Send notes to a connected Wear OS watch
  *  - Export notes as Word documents
  */
-public class EditSummaryActivity extends Activity {
+public class EditSummaryActivity extends AppCompatActivity {
 
     private ActivityEditSummaryBinding binding; // View binding for UI
     private ArrayAdapter<String> tagAdapter;    // Adapter for tag spinner
@@ -85,6 +86,18 @@ public class EditSummaryActivity extends Activity {
 
         // Setup spinner adapter
         tagAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tagList);
+
+        // Add back button functionality to Toolbar
+        if (binding.topBar != null) {
+            binding.topBar.setNavigationOnClickListener(v -> {
+                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                    getSupportFragmentManager().popBackStack();
+                } else {
+                    finish();
+                }
+            });
+        }
+
         tagAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.spinnerTags.setAdapter(tagAdapter);
 

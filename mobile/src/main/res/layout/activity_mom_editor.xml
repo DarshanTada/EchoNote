@@ -1,40 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="@dimen/mom_editor_scroll_padding"
+    android:fitsSystemWindows="true"
+    >
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/topbar_bg"
+            app:title="@string/mom_list_title"
+            app:titleTextColor="@color/topbar_text"
+            app:titleTextAppearance="@style/TextAppearance.AppCompat.Large"
+            app:navigationIcon="@drawable/baseline_arrow_back"/>
+
         <EditText
             android:id="@+id/et_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Title" />
+            android:autofillHints=""
+            android:hint="@string/title_label"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/et_tags"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tags (comma separated)"
-            android:layout_marginTop="8dp" />
+            android:autofillHints=""
+            android:hint="@string/tags_hint"
+            android:layout_marginTop="@dimen/mom_editor_margin_top"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/et_reminder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Reminder (yyyy-MM-dd HH:mm)"
-            android:layout_marginTop="8dp" />
+            android:autofillHints=""
+            android:hint="@string/reminder_hint"
+            android:layout_marginTop="@dimen/mom_editor_margin_top"
+            android:inputType="text" />
 
         <Button
             android:id="@+id/btn_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save"
-            android:layout_marginTop="16dp" />
+            android:text="@string/save"
+            android:layout_marginTop="@dimen/mom_editor_button_margin_top" />
     </LinearLayout>
 </ScrollView>

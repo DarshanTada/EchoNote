@@ -109,6 +109,19 @@ public class MOMListActivity extends Activity {
         binding = ActivityMomListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Set up back button functionality for Toolbar
+        if (binding.topBar != null) {
+            binding.topBar.setNavigationOnClickListener(v -> {
+                // If using fragments, pop the back stack
+                if (getFragmentManager().getBackStackEntryCount() > 0) {
+                    getFragmentManager().popBackStack();
+                } else {
+                    // Otherwise, finish the activity
+                    finish();
+                }
+            });
+        }
+
         // Initialize filtered list
         filteredNotes.clear();
         filteredNotes.addAll(momNotes);

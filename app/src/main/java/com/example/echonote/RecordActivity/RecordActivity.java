@@ -78,7 +78,7 @@ public class RecordActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
 
         // Example text to send to phone (for testing)
-        sendTextToMobile("Hi guys we need to complete this project by end of the week and we need to show demo to client in 1st week of September and apart from that do you have any other questions?");
+//        sendTextToMobile("Hi guys we need to complete this project by end of the week and we need to show demo to client in 1st week of September and apart from that do you have any other questions?");
 
         // Check if the result is from speech recognition and is successful
         if (requestCode == SPEECH_REQUEST_CODE && resultCode == RESULT_OK) {

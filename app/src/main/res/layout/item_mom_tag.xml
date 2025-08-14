@@ -3,15 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="12dp"
+    android:padding="@dimen/item_mom_tag_padding"
     android:orientation="vertical"
-    android:background="?attr/selectableItemBackground">
+    android:background="@color/item_mom_tag_background">
 
     <TextView
         android:id="@+id/tagName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@android:color/black" />
+        android:textSize="@dimen/item_mom_tag_text_size"
+        android:textColor="@color/item_mom_tag_text" />
 
 </LinearLayout>

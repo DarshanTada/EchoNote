@@ -5,26 +5,29 @@
     android:padding="12dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground">
+    android:background="@color/item_mom_background">
 
     <TextView
         android:id="@+id/mom_title"
-        android:textSize="18sp"
+        android:textSize="@dimen/item_mom_text_size"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black" />
+        android:textColor="@color/item_mom_text"
+        android:layout_marginBottom="@dimen/item_mom_margin" />
 
     <TextView
         android:id="@+id/mom_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/darker_gray" />
+        android:textColor="@color/item_mom_text"
+        android:layout_marginBottom="@dimen/item_mom_margin" />
 
     <TextView
         android:id="@+id/mom_tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/holo_blue_dark" />
+        android:textColor="@color/item_mom_text"
+        android:layout_marginBottom="@dimen/item_mom_margin" />
 
 </LinearLayout>

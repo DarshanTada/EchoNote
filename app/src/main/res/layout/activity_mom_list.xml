@@ -3,15 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/black">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/momCard"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
+        android:layout_width="@dimen/text_size_0"
+        android:layout_height="@dimen/text_size_0"
+        android:layout_margin="@dimen/mom_card_margin"
+        app:cardCornerRadius="@dimen/mom_card_corner_radius"
+        app:cardElevation="@dimen/mom_card_elevation"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,9 +22,11 @@
             android:id="@+id/mom_list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@android:color/darker_gray"
-            android:dividerHeight="1dp"
-            android:padding="8dp" />
+            android:background="@color/black"
+            android:textColor="@color/white"
+            android:divider="@color/darker_gray"
+            android:dividerHeight="@dimen/mom_list_divider_height"
+            android:padding="@dimen/mom_list_padding" />
 
     </androidx.cardview.widget.CardView>
 

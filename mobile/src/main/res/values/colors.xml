@@ -7,4 +7,19 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="main_bg">#EFE9E1</color>
+    <color name="topbar_bg">#EFE9E1</color>
+    <color name="topbar_text">#322D29</color>
+    <color name="button_bg">#72383D</color>
+    <color name="card_bg">#EFE9E1</color>
+    <color name="list_divider">#322D29</color>
+    <color name="minutes_background">#F5F5F5</color>
+    <color name="save_button_background">#2196F3</color>
+    <color name="export_button_background">#4CAF50</color>
+    <color name="list_item_tag_note_bg">@color/card_bg</color>
+    <color name="list_item_tag_note_text">@color/topbar_text</color>
+    <color name="item_mom_bg">@color/black</color>
+    <color name="item_mom_text">@color/white</color>
+    <color name="tag_item_bg">?attr/selectableItemBackground</color>
+    <color name="tag_item_text">@color/topbar_text</color>
 </resources>

@@ -1,52 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.wear.widget.BoxInsetLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="@color/mom_detail_background">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title"
-            android:textSize="@dimen/mom_detail_title_text_size"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/tv_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/date"
-            android:layout_marginTop="@dimen/mom_detail_margin_top" />
-
-        <TextView
-            android:id="@+id/tv_tag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tag"
-            android:layout_marginTop="@dimen/mom_detail_margin_top" />
-
-
-        <TextView
-            android:id="@+id/tv_details"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/details"
-            android:layout_marginTop="@dimen/mom_detail_margin_top"
-            android:scrollbars="vertical"
-            android:padding="@dimen/mom_detail_details_padding" />
+            android:padding="16dp"
+            android:gravity="center">
 
-        <Button
-            android:id="@+id/btn_play"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/playaudio"
-            android:layout_marginTop="16dp" />
-    </LinearLayout>
-</ScrollView>
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title"
+                android:textSize="@dimen/mom_detail_title_text_size"
+                android:textStyle="bold"
+                android:textColor="@color/mom_detail_text"/>
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                android:layout_marginTop="@dimen/mom_detail_margin_top"
+                android:textColor="@color/mom_detail_text" />
+
+            <TextView
+                android:id="@+id/tv_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tag"
+                android:layout_marginTop="@dimen/mom_detail_margin_top"
+                android:textColor="@color/mom_detail_text" />
+
+
+            <TextView
+                android:id="@+id/tv_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/details"
+                android:layout_marginTop="@dimen/mom_detail_margin_top"
+                android:scrollbars="vertical"
+                android:padding="@dimen/mom_detail_details_padding"
+                android:textColor="@color/mom_detail_text" />
+
+            <Button
+                android:id="@+id/btn_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/playaudio"
+                android:background="@drawable/rounded_button_bg"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/mom_detail_button_margin_top" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.wear.widget.BoxInsetLayout>

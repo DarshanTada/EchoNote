@@ -4,34 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="12dp"
-    android:background="#FFFFFF">
+    android:padding="@dimen/list_item_tag_note_padding"
+    android:background="@color/list_item_tag_note_bg">
 
     <TextView
         android:id="@+id/note_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2025-08-13"
-        android:textColor="#000000"
-        android:textSize="12sp" />
+        android:text="@string/note_date_sample"
+        android:textColor="@color/list_item_tag_note_text"
+        android:textSize="@dimen/list_item_tag_note_date_text_size" />
 
     <TextView
         android:id="@+id/note_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Meeting Notes"
-        android:textColor="#000000"
+        android:text="@string/meeting_notes"
+        android:textColor="@color/list_item_tag_note_text"
         android:textStyle="bold"
-        android:textSize="16sp"
-        android:layout_marginTop="2dp" />
+        android:textSize="@dimen/list_item_tag_note_title_text_size"
+        android:layout_marginTop="@dimen/list_item_tag_note_title_margin_top" />
 
     <TextView
         android:id="@+id/note_tags"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Work, ProjectX"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:layout_marginTop="2dp" />
+        android:text="@string/work_projectx"
+        android:textColor="@color/list_item_tag_note_text"
+        android:textSize="@dimen/list_item_tag_note_tags_text_size"
+        android:layout_marginTop="@dimen/list_item_tag_note_tags_margin_top" />
 
 </LinearLayout>

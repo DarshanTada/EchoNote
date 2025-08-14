@@ -4,18 +4,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:background="@color/main_bg">
 
     <!-- Top Bar with EchoNote title and default back button -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/topBar"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/mom_list_toolbar_width"
         android:layout_height="wrap_content"
-        android:background="#EFE9E1"
-        app:title="EchoNote"
-        app:titleTextColor="#322D29"
+        android:background="@color/topbar_bg"
+        app:title="@string/mom_list_title"
+        app:titleTextColor="@color/topbar_text"
         app:titleTextAppearance="@style/TextAppearance.AppCompat.Large"
-        app:navigationIcon="@android:drawable/ic_menu_revert"
+        app:navigationIcon="@drawable/baseline_arrow_back"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -23,10 +24,12 @@
     <!-- ListView below the top bar -->
     <ListView
         android:id="@+id/mom_list_view"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/mom_list_listview_width"
+        android:layout_height="@dimen/mom_list_listview_height"
+        android:background="@color/main_bg"
+        android:textColor="@color/topbar_text"
         app:layout_constraintTop_toBottomOf="@id/topBar"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

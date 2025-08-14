@@ -1,3 +1,36 @@
 <resources>
-    <string name="app_name">mobile</string>
+    <string name="app_name">EchoNote</string>
+    <string name="title_label">Title</string>
+    <string name="title_hint">Enter title</string>
+    <string name="minutes_label">Meeting Minutes (auto-generated)</string>
+    <string name="minutes_generating">Generating…</string>
+    <string name="tag_label">Tag</string>
+    <string name="add_tag">Add New Tag</string>
+    <string name="save">Save</string>
+    <string name="export">Export</string>
+    <string name="view_new_list">View New List</string>
+    <string name="meeting_notes">Meeting Notes</string>
+    <string name="work_projectx">Work, ProjectX</string>
+    <string name="meeting_title">Meeting Title</string>
+    <string name="summary">Summary</string>
+    <string name="action_points">Action Points</string>
+    <string name="minutes_of_meeting">Minutes of Meeting</string>
+    <string name="read_unread">Read/Unread</string>
+    <string name="convert_voice_to_text">Convert Voice to Text</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="export_to_word">Export to Word</string>
+    <string name="tags_hint">Tags (comma separated)</string>
+    <string name="reminder_hint">Reminder (yyyy-MM-dd HH:mm)</string>
+    <string name="add_tag_button">Add New Tag</string>
+    <string name="record_meeting">Record Meeting</string>
+    <string name="view_mom_list">View MOM List</string>
+    <string name="playaudio">Play Audio</string>
+    <string name="date">Date</string>
+    <string name="tag">Tag</string>
+    <string name="details">Details</string>
+    <string name="pending_message">Summary is being generated…</string>
+    <string name="recognized_text">Recognized Text</string>
+    <string name="note_date_sample">2025-08-13</string>
+    <string name="mom_list_title">EchoNote</string>
 </resources>
